@@ -1,0 +1,14 @@
+id,name,costCoins,costDiamonds,effectText,buyCost,effect,tier
+1,Test Card,5,1,🪙🪙🪙,7,"[""coin"", 3]",s
+2,Test Card,6,0,🪙🪙🪙,5,"[""coin"", 3]",s
+3,Test Card,12,0,🪙🪙🪙,1,"[""coin"", 3]",s
+4,Test Card,5,1,🪙🪙🪙,23,"[""coin"", 3]",s
+5,Test Card,3,2,🪙🪙🪙,5,"[""coin"", 3]",s
+6,Test Card,2,2,🪙🪙🪙,54,"[""coin"", 3]",s
+7,Test Card,18,3,🪙🪙🪙,5,"[""coin"", 3]",s
+8,Test Card,15,2,💎,22,diamond,s
+9,Test Card,16,0,💎,4,diamond,s
+10,Test Card,11,0,💎,22,diamond,s
+11,Test Card,2,1,💎,5,diamond,s
+12,Test Card,3,2,💎,4,diamond,s
+13,Test Card,7,1,💎,4,diamond,s
