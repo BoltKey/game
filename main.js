@@ -1,59 +1,10 @@
 import { doEffect } from "./doEffect.js";
-import { cardData, discardDeck, handCards, resources } from "./globals.js";
+import { cardData, discardDeck, drawDeck, handCards, resources, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
+import { domId, updateGame } from "./update.js";
 
 let loaded = false;
 
-function getHandDiv() {
-  return document.getElementById("hand-wrap")
-}
 
-function getPlayArea() {
-  return document.getElementById("game-wrap")
-}
-
-function updateHand() {
-  let maxWidth = 600;
-  let margin = 120;
-  let x = 350;
-  let y = 300;
-
-  let finalMargin = Math.min(margin, maxWidth / (handCards.length - 1))
-  let currX = x - (handCards.length - 1) / 2 * finalMargin;
-
-  for (let card of handCards) {
-    let currCard = document.getElementById(domId(card.id));
-    if (!currCard) {
-      currCard = createCard(card);
-      getHandDiv().appendChild(currCard)
-    }
-    currCard.style.left = currX + "px";
-    currCard.style.top = y + "px";
-    currX += finalMargin;
-  }
-
-  for (let card of getHandDiv().querySelectorAll(".card")) {
-    if (!handCards.find(c => domId(c.id) === card.id)) {
-      //removeCard(card);
-    }
-  }
-}
-
-function removeCard(card) {
-  let animation = card.animate([
-    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 10},
-    { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
-    { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
-    { transform: "scale(0.7, 0.7) translate(100px, 30px)", opacity: 0},
-  ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
-  animation.onfinish = () => {
-    console.log("animation complete");
-    card.remove()
-  }
-}
-
-function domId(id) {
-  return "card-" + id;
-}
 
 function main() {
   loadCards();
@@ -74,60 +25,44 @@ Array.prototype.toShuffled = function() {
 }
 
 function startGame() {
+  document.getElementById("game-wrap").classList.remove("hidden")
   let deck = cardData.filter(card => card.tier === "s").toShuffled();
-  for (let i = 0; i < 9; ++i) {
-    handCards.push(deck.shift())
+  drawDeck.push(...deck)
+
+  let offer = cardData.filter(card => card.tier === "1").toShuffled();
+  supplyDeck.push(...offer);
+  for (let i = 0; i < 4; ++i) {
+    supplyOffer.push(supplyDeck.shift())
   }
+
+  doEffect(["draw", 3]);
   for (let resName of ["heart", "coin", "diamond", "vp"]) {
     document.getElementById(resName + "-number").innerText = resources[resName]
   }
-  updateHand();
+  updateGame();
   /*for (let card of cardData) {
     document.getElementById("game-wrap").appendChild(createCard(card));
   }*/
+  document.getElementById("endturn").onclick = endTurn;
 }
 
-function updateGame() {
-  updateHand();
-}
-
-
-
-function playCard(card) {
-  console.log("play card", card);
-  let handIndex = handCards.findIndex(c => c.id === card.dataset.id)
-  if (handIndex == -1) {
-    return;
+function endTurn() {
+  doEffect(["sword", -resources.sword]);
+  for (let c of summonedCards) {
+    let effect = c.effect;
+    doEffect(effect, document.getElementById(domId(c.id)));
   }
-  discardDeck.push(handCards.splice(handIndex, 1))
-  doEffect(card.dataset.effect)
-  removeCard(card);
-  updateHand();
+  for (let c of handCards) {
+    doEffect(["coin", -1], document.getElementById(domId(c.id)));
+  }
+  doEffect(["draw", 3])
 }
 
-function createCard(data) {
-  let card = document.createElement("div");
-  let textPrefix = {
-    costCoins: "🪙",
-    buyCost: "🪙",
-    costDiamonds: "💎"
-  }
-  card.classList.add("card")
-  card.id = domId(data.id);
-  for (let name of ["costCoins", "costDiamonds", "effectText", "buyCost", "effect", "id"]) {
-    if (!["effect", "id"].includes(name)) {
-      let el = document.createElement("div");
-      el.classList.add(name)
-      el.innerHTML = (textPrefix[name] ?? "") + data[name]
-      card.appendChild(el)
-    }
-    card.setAttribute("data-" + name, data[name])
-  }
-  card.addEventListener("click", evt => {
-    playCard(evt.target)
-  })
-  return card;
-}
+
+
+
+
+
 
 function loadCards() {
   fetch('cards.csv')
