@@ -1,5 +1,5 @@
 import { createFlyer } from "./flyers.js";
-import { discardDeck, drawDeck, emojiDictionary, handCards, resources } from "./globals.js";
+import { activeMonsters, discardDeck, drawDeck, emojiDictionary, handCards, resources } from "./globals.js";
 import { updateGame } from "./update.js";
 
 
@@ -18,6 +18,12 @@ export function doEffect(effect, sourceComponent) {
     else {
       effect = [effect, 1]
     }
+  }
+  if (Array.isArray(effect[0])) {
+    for (let e of effect) {
+      doEffect(e, sourceComponent)
+    }
+    return;
   }
   let effectName = effect[0];
   if (emojiDictionary[effectName]) {
@@ -63,7 +69,14 @@ export function doEffect(effect, sourceComponent) {
           updateGame()
           break;
         }
-        handCards.push(drawDeck.shift())
+        let newCard = drawDeck.shift()
+        if (newCard.type === "monster") {
+          activeMonsters.push(newCard)
+        }
+        else {
+          handCards.push(newCard);
+        }
+
       }
       updateGame()
       break;

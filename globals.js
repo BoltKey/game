@@ -3,11 +3,47 @@ export const drawDeck = [];
 export const discardDeck = [];
 export const summonedCards = [];
 export const supplyOffer = [];
-export const supplyDeck = []
+export const supplyDeck = [];
+export const activeMonsters = [];
+export const monsterQueue = [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+];
 export const resources = {
   "heart": 10,
   "coin": 10,
-  "diamond": 5,
+  "diamond": 0,
   "vp": 0,
   "sword": 0,
 }
