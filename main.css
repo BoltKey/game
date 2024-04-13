@@ -56,6 +56,9 @@ body {
 .banishVp {
   right: 4px;
 }
+.defendCost {
+  left: 35px
+}
 
 #headup-wrap {
   position: absolute;

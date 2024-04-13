@@ -62,7 +62,7 @@ function endTurn() {
     doEffect(["coin", -1], document.getElementById(domId(c.id)));
   }
   for (let c of activeMonsters) {
-    let cost = c.effect;
+    let cost = c.defendCost;
     doEffect(["coin", -cost], document.getElementById(domId(c.id)));
   }
   moveMonsters();

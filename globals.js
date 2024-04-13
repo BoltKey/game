@@ -43,7 +43,7 @@ export const monsterQueue = [
 export const resources = {
   "heart": 10,
   "coin": 10,
-  "diamond": 0,
+  "diamond": 1,
   "vp": 0,
   "sword": 0,
 }

@@ -101,6 +101,7 @@ function createCard(data) {
   let textPrefix = {
     costCoins: "🪙",
     buyCost: "🪙",
+    defendCost: "🪙",
     costDiamonds: "💎",
     costSword: "⚔️",
     banishVp: "⭐"
