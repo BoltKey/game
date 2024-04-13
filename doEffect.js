@@ -28,6 +28,7 @@ export function doEffect(effect, sourceComponent) {
           createFlyer("FLY", sourceComponent)
         })
       }
+      document.getElementById(effectName + "-number").innerText = resources[effectName]
       break;
   }
 }

@@ -6,7 +6,7 @@ export const resources = {
   "heart": 10,
   "coin": 10,
   "diamond": 5,
-  "star": 0
+  "vp": 0
 }
 
 export const cardData = [];

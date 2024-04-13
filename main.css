@@ -11,8 +11,13 @@
   height: 180px;
   filter: drop-shadow(2px 4px 6px black);
   position: absolute;
-  transition: left .6s, top .6s;
+  transition: left .6s, top .6s, transform .3s;
   animation-timing-function: ease;
+}
+.card:hover {
+  transform: scale(1.1, 1.1);
+  z-index: 5;
+  cursor: pointer;
 }
 
 .card * {

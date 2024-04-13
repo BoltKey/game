@@ -1,5 +1,5 @@
 import { doEffect } from "./doEffect.js";
-import { cardData, discardDeck, handCards } from "./globals.js";
+import { cardData, discardDeck, handCards, resources } from "./globals.js";
 
 let loaded = false;
 
@@ -40,7 +40,7 @@ function updateHand() {
 
 function removeCard(card) {
   let animation = card.animate([
-    { transform: "scale(1, 1) translate(0, 0)", opacity: 1, zIndex: 10},
+    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 10},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
     { transform: "scale(0.7, 0.7) translate(100px, 30px)", opacity: 0},
@@ -77,6 +77,9 @@ function startGame() {
   let deck = cardData.filter(card => card.tier === "s").toShuffled();
   for (let i = 0; i < 9; ++i) {
     handCards.push(deck.shift())
+  }
+  for (let resName of ["heart", "coin", "diamond", "vp"]) {
+    document.getElementById(resName + "-number").innerText = resources[resName]
   }
   updateHand();
   /*for (let card of cardData) {
