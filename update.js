@@ -92,6 +92,9 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
       case handCards:
         location = "hand"
         break;
+      case summonedCards:
+        location = "summoned"
+        break;
       case activeMonsters:
         location = "activeMonsters"
         break;
@@ -209,8 +212,8 @@ function summonCard(card) {
   let type = card.dataset.type;
   let costDiamonds = card.dataset.costdiamonds || 0
   let costCoins = card.dataset.costcoins || 0
-  doEffect(["coin", -costCoins], card)
-  doEffect(["diamond", -costDiamonds], card)
+  doEffect(["coin", -costCoins], card, false, 500)
+  doEffect(["diamond", -costDiamonds], card, false, 500)
   let c = handCards.splice(handIndex, 1)[0]
   summonedCards.push(c)
   updateGame();
@@ -265,13 +268,13 @@ function banishCard(card) {
 }
 
 export function monsterAttack(card) {
-  let animation = card.animate([
+  /*let animation = card.animate([
     { transform: "scale(1, 1)", },
     { transform: "scale(1.1, 1.1)", },
     { transform: "scale(1, 1)", },
   ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {
-  }
+  }*/
 }
 
 export function gameOver() {
