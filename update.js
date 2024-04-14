@@ -19,7 +19,7 @@ export function updateOffer() {
   updateCards(supplyOffer, 350, 50, 140, 600);
 }
 function updateActiveMonsters() {
-  updateCards(activeMonsters, 350, 780, 140, 600)
+  updateCards(activeMonsters, 380, 780, 140, 500)
 }
 export function updateMonsterQueue() {
   for (let row = 0; row <= 5; ++row) {
@@ -92,6 +92,9 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
       case handCards:
         location = "hand"
         break;
+      case activeMonsters:
+        location = "activeMonsters"
+        break;
     }
     currCard.setAttribute("data-location", location)
     currX += finalMargin;
@@ -154,7 +157,7 @@ function playCard(card) {
   if (status.eval) {
     return;
   }
-  if (card.dataset.type === "monster") {
+  if (card.dataset.type === "monster" && card.dataset.location === "activeMonsters") {
     killCard(card);
     return;
   }
@@ -228,7 +231,7 @@ function removeCard(card) {
     { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 100},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
-    { transform: "scale(0.7, 0.7) translate(100px, 30px)", opacity: 0},
+    { transform: "scale(0.7, 0.7) translate(400px, -20px)", opacity: 0},
   ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {
     console.log("animation complete");

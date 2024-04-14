@@ -86,9 +86,7 @@ function startGame() {
 }
 
 async function endTurn() {
-  for (let effectName of ["coin", "diamond", "sword"]) {
-    document.getElementById(effectName + "-number").innerText = resources[effectName];
-  }
+
   doEffect(["coin", resources.sword]);
   doEffect(["sword", -resources.sword]);
   status.eval = true;
@@ -121,7 +119,11 @@ async function endTurn() {
   document.getElementById("endturn").removeAttribute("disabled")
   status.eval = false;
   updateGame();
-  doEffect(["draw", 3])
+  doEffect(["draw", 3]);
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  for (let effectName of ["coin", "diamond", "sword"]) {
+    document.getElementById(effectName + "-number").innerText = resources[effectName];
+  }
 }
 
 function bossStrength() {

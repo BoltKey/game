@@ -75,7 +75,8 @@ body {
 
 #headup-wrap {
   position: absolute;
-  right: 10px;
+  bottom: 40px;
+  left: 37px;
 }
 
 .effectText {
@@ -95,7 +96,7 @@ body {
 }
 
 #headup-wrap * {
-  font-size: large;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -174,7 +175,7 @@ button[disabled] {
   position: absolute;
   top: 10px;
   z-index: 3500;
-  background-color: rgba(255, 200, 97, 0.6);
+  background-color: rgba(255, 200, 97, 1);
   backdrop-filter: blur(10px);
   padding: 30px;
   width: 100%;
@@ -219,4 +220,29 @@ div#gamewin {
 
 .hidden {
   display: none;
+}
+
+
+.deck {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 16px;
+}
+
+#deck {
+  background: green;
+  bottom: 300px;
+  left: 20px;
+}
+
+#discard {
+  background: green;
+  bottom: 300px;
+  left: 680px;
 }
