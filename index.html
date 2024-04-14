@@ -15,7 +15,8 @@
     </div>
     <div id="cheatsheet">
       💎🡒🪙<br>
-      4🪙🡒⚔️
+      4🪙🡒⚔️<br>
+      ⚔️🡒🪙
     </div>
     <div id="headup-wrap">
       <div id="heart" style="display: none;">
@@ -41,6 +42,61 @@
       </div>
     </div>
     <button id="endturn">End turn</button>
+    <button id="help">?</button>
+  </div>
+  <div id="rules">
+    <h1>Rules</h1>
+    There is a number of mechanics you should understand in order to win by defeating all monsters.
+    You may need multiple attempts before you manage to win.
+    <h2>Goal of the game</h2>
+    Defeat all monsters.
+    <h2>Card anatomy</h2>
+    [image of card]
+    <h2>Resources</h2>
+    There are 3 resources.
+    <ul>
+      <li>
+        <b>🪙</b> are useful for buying new cards into your deck. They also act as your life counter: each turn a monster is attacking your castle, you lose number of 🪙 based on the strength of the monster.
+      </li>
+      <li>
+        <b>💎</b> are rare resource useful for summoning your cards. Whenever you should pay 🪙 but you have none left, a 💎 will be used as a 🪙.
+      </li>
+      <li>
+        <b>⚔️</b> are needed to kill attacking monsters. Each monster has an indicated number of ⚔️ needed to defeat it. To kill a monster, click on it. If you don't have enough ⚔️, you use 4 🪙 as 1 ⚔️. Unused ⚔️ are transformed into 🪙
+      </li>
+    </ul>
+    <h2>Areas</h2>
+    At the bottom, there are cards in your hand. You can do one of 3 things with each card in your hand...
+    <ul>
+      <li>
+        <b>Play the card:</b> click on the card effect to evaluate its effect and put it into your discard pile. The card always gives you some resources. Cards with the 🎴 effect draw you a card.
+      </li>
+      <li>
+        <b>Summon the card:</b> click on the 🪄 button to summon the card: pay its summon cost in top right and put it into your summon area. From now on, gain that card's effect at the start of every turn.
+      </li>
+      <li>
+        <b>Keep the card:</b> sometimes, you may want to keep the card. You will pay 1 🪙 for each card you decide to keep.
+      </li>
+    </ul>
+    In the middle, you have your summoned cards. <br>
+    On the top of the screen, there is an offer of cards you can buy into your deck. The cost is in the top-right corner. The new card goes into your discard pile.
+    <h2>
+      Turn structure
+    </h2>
+    At the end of every turn, several things happen:
+    <ol>
+
+      <li>
+        <b>Activate summoned cards:</b> do all the effects on all the cards you have summoned so far
+      </li>
+      <li>
+        <b>Activate monsters:</b> there are monsters coming to your castle. All the monsters move one step closer to the castle. Monster that are already in front of your castle take 🪙 according to their strength. If you don't have enough
+      </li>
+      <li>
+        <b>Draw 3 cards:</b> Whenever you should draw a card and your deck is empty, your discard pile will be shuffled to form a new draw deck.
+      </li>
+    </ol>
+    <button id="close-help">Let's play!</button>
   </div>
 </body>
 </html>

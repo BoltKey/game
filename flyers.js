@@ -2,17 +2,21 @@ import { emojiDictionary } from "./globals.js";
 
 export function createFlyer(content, from, opposite) {
   let wrap = document.getElementById("game-wrap");
+  if (!wrap || !from) {
+    return;
+  }
   let fromRect = from.getBoundingClientRect();
   let toRect = document.getElementById(content + "-number").getBoundingClientRect();
 
   if (opposite) {
     [fromRect, toRect] = [toRect, fromRect]
   }
+  let wrapRect = wrap.getBoundingClientRect();
 
-  let fromX = fromRect.left + fromRect.width / 2
-  let fromY = fromRect.top + fromRect.height / 2
-  let toX = toRect.left + toRect.width / 2 - 15
-  let toY = toRect.top + toRect.height / 2 - 15
+  let fromX = fromRect.left + fromRect.width / 2 - wrapRect.left
+  let fromY = fromRect.top + fromRect.height / 2 - wrapRect.top
+  let toX = toRect.left + toRect.width / 2 - 15 - wrapRect.left
+  let toY = toRect.top + toRect.height / 2 - 15 - wrapRect.top
 
   let dictEntry = Object.entries(emojiDictionary).find(e => e[1] === content)
   if (dictEntry) {

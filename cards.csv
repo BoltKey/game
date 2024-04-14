@@ -1,28 +1,28 @@
 id,name,costCoins,costDiamonds,costSword,effectText,defendCost,buyCost,effect,tier,type
-1,Swordsman,8,,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
-2,Knight,17,3,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
-3,Archer,5,,,⚔️⚔️,,9,"[[""sword"", 2]]",1,action
-4,Super Miner,8,2,,🪙🪙🪙,,8,"[[""coin"", 3]]",1,action
-5,Swordsman,5,2,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
-6,Spy,4,4,,⚔️🎴,,8,"[[""sword"", 1], [""draw"", 1]]",1,action
-8,Knight,15,4,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
-9,Royal Knight,8,6,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
+1,Swordsman,8,1,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
+2,Knight,17,4,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
+3,Archer,5,1,,⚔️⚔️,,9,"[[""sword"", 2]]",1,action
+4,Super Miner,8,3,,🪙🪙🪙,,8,"[[""coin"", 3]]",1,action
+5,Swordsman,5,3,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
+6,Spy,4,5,,⚔️🎴,,8,"[[""sword"", 1], [""draw"", 1]]",1,action
+8,Knight,15,5,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
+9,Royal Knight,8,7,,⚔️⚔️⚔️,,9,"[[""sword"", 3]]",1,action
 10,Prospector,4,,,💎,,2,"[[""diamond"", 1]]",1,action
 11,Advanced Prospector,5,2,,🪙🪙💎,,4,"[[""coin"", 2], ""diamond""]",1,action
-12,Rookie Swordsman,,4,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
-13,Spy,7,3,,⚔️🎴,,8,"[[""sword"", 1], [""draw"", 1]]",1,action
+12,Rookie Swordsman,,5,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
+13,Spy,7,4,,⚔️🎴,,8,"[[""sword"", 1], [""draw"", 1]]",1,action
 14,Basic Miner,,2,,🪙,,,coin,s,action
 15,Basic Miner,,2,,🪙,,,coin,s,action
 16,Basic Miner,,2,,🪙,,,coin,s,action
 17,Basic Prospector,7,,,💎,,,diamond,s,action
 18,Basic Prospector,7,,,💎,,,diamond,s,action
-20,Peasant Swordsman,8,,,⚔️,,,sword,s,action
-21,Novice Swordsman,5,1,,⚔️,,,sword,s,action
-22,Greenhorn Swordsman,2,2,,⚔️,,,sword,s,action
+20,Peasant Swordsman,8,1,,⚔️,,,sword,s,action
+21,Novice Swordsman,5,2,,⚔️,,,sword,s,action
+22,Greenhorn Swordsman,2,3,,⚔️,,,sword,s,action
 24,Basic Miner,,2,,🪙,,,coin,s,action
 25,Basic Miner,,2,,🪙,,,coin,s,action
-26,Advanced Miner,,3,,🪙🪙,,,"[[""coin"", 2]]",s,action
-27,Advanced Miner,,3,,🪙🪙,,,"[[""coin"", 2]]",s,action
+26,Advanced Miner,,4,,🪙🪙,,,"[[""coin"", 2]]",s,action
+27,Advanced Miner,,4,,🪙🪙,,,"[[""coin"", 2]]",s,action
 23,Weak Imp,,,1,-1🪙,1,,,0,monster
 19,Imp,,,2,-1🪙,1,,,1,monster
 28,Strong Imp,,,3,-1🪙,1,,,3,monster

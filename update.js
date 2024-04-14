@@ -13,13 +13,13 @@ export function updateHand() {
   updateCards(handCards, 350, 550, 140, 600);
 }
 export function updateSummoned() {
-  updateCards(summonedCards, 350, 350, 100, 600);
+  updateCards(summonedCards, 350, 350, 100, 600, 0.8);
 }
 export function updateOffer() {
   updateCards(supplyOffer, 350, 50, 140, 600);
 }
 function updateActiveMonsters() {
-  updateCards(activeMonsters, 930, 780, 140, 600)
+  updateCards(activeMonsters, 350, 780, 140, 600)
 }
 export function updateMonsterQueue() {
   for (let row = 0; row <= 5; ++row) {
@@ -29,7 +29,7 @@ export function updateMonsterQueue() {
     }
     let y = [570, 420, 320, 230, 150, 100]
     if (monsterQueue[row]) {
-      updateCards(monsterQueue[row], 930, y[row], 140, 600, 0.7 - row * 0.1);
+      updateCards(monsterQueue[row], 800, y[row], 100 - row * 10, 600, 0.7 - row * 0.1);
     }
   }
 }
@@ -54,6 +54,7 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
   let finalMargin = Math.min(margin, maxWidth / (cards.length - 1))
   let currX = x - (cards.length - 1) / 2 * finalMargin;
 
+  let zIndex = 20
   for (let card of cards) {
     let currCard = document.getElementById(domId(card.id));
     if (!currCard) {
@@ -62,6 +63,9 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
     }
     currCard.style.left = currX + "px";
     currCard.style.top = y + "px";
+    currCard.style.zIndex = zIndex;
+    ++zIndex
+
     currCard.children[0].style.transform = "scale(" + scale + ", " + scale + ")";
     if (cards === handCards) {
       if (!currCard.querySelector(".summon-button") && currCard.dataset.type !== "monster") {
@@ -73,6 +77,9 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
         }
         currCard.appendChild(button)
       }
+    }
+    else {
+      currCard.querySelector(".summon-button")?.remove()
     }
     let location = "";
     switch(cards) {
@@ -130,7 +137,7 @@ function createCard(data) {
     if (evt.target.dataset.location === "supplyOffer") {
       gainCard(evt.target)
     }
-    if (evt.offsetY > 100) {
+    if (evt.offsetY > 50) {
       playCard(evt.target)
     }
   })
@@ -212,7 +219,7 @@ function getPlayArea() {
 
 function removeCard(card) {
   let animation = card.animate([
-    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 10},
+    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 100},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
     { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
     { transform: "scale(0.7, 0.7) translate(100px, 30px)", opacity: 0},
@@ -237,7 +244,7 @@ function gainCardAnim(card) {
 
 function banishCard(card) {
   let animation = card.animate([
-    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 10},
+    { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 100},
     { transform: "scale(0.7, 0.7) translate(0px, 60px)", opacity: 0},
   ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {

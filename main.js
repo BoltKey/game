@@ -3,7 +3,7 @@ import { activeMonsters, cardData, discardDeck, drawDeck, handCards, monsterQueu
 import { domId, monsterAttack, updateGame } from "./update.js";
 
 let loaded = false;
-
+let helpOpen = false;
 
 
 function main() {
@@ -22,6 +22,16 @@ Array.prototype.toShuffled = function() {
     this[i] = swap;
   }
   return this;
+}
+
+function toggleHelp() {
+  helpOpen = !helpOpen;
+  if (helpOpen) {
+    document.getElementById("rules").classList.add("open")
+  }
+  else {
+    document.getElementById("rules").classList.remove("open")
+  }
 }
 
 function startGame() {
@@ -52,6 +62,8 @@ function startGame() {
     document.getElementById("game-wrap").appendChild(createCard(card));
   }*/
   document.getElementById("endturn").onclick = endTurn;
+  document.getElementById("close-help").onclick = toggleHelp;
+  document.getElementById("help").onclick = toggleHelp;
 }
 
 function endTurn() {

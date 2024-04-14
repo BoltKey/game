@@ -33,17 +33,20 @@ export function doEffect(effect, sourceComponent) {
     case "coin": case "diamond": case "heart": case "vp": case "sword":
       let amt = effect[1]
       if (amt < -resources[effectName]) {
-        if (effectName === "coin") {
-          effectName = "diamond";  // if no more coins, pay with diamonds instead
-        }
         amt = -resources[effectName]
         let missing = effect[1] - amt;
-        let coinCost = missing * coinValues[effectName];
-        if (!coinCost) {
-          throw new Error("Not enough resources")
+        if (effectName === "coin") {
 
+          doEffect(["diamond", missing], sourceComponent)
         }
-        doEffect(["coin", coinCost], sourceComponent);
+        else {
+          let coinCost = missing * coinValues[effectName];
+          if (!coinCost) {
+            throw new Error("Not enough resources")
+
+          }
+          doEffect(["coin", coinCost], sourceComponent);
+        }
       }
       if (amt < -resources[effectName]) {
         //throw new Error("Not enough resources")
