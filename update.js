@@ -154,8 +154,9 @@ function playCard(card) {
   if (handIndex == -1) {
     return;
   }
+  let playCard = handCards.splice(handIndex, 1)[0]
   doEffect(card.dataset.effect, card)
-  discardDeck.push(handCards.splice(handIndex, 1)[0])
+  discardDeck.push(playCard)
   removeCard(card);
   updateGame();
 }
