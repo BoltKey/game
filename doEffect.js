@@ -4,8 +4,7 @@ import { updateGame } from "./update.js";
 
 
 const coinValues = {
-  "sword": 5,
-  "diamond": 10
+  "sword": 4
 }
 export function doEffect(effect, sourceComponent) {
   console.log(effect)
@@ -34,6 +33,9 @@ export function doEffect(effect, sourceComponent) {
     case "coin": case "diamond": case "heart": case "vp": case "sword":
       let amt = effect[1]
       if (amt < -resources[effectName]) {
+        if (effectName === "coin") {
+          effectName = "diamond";  // if no more coins, pay with diamonds instead
+        }
         amt = -resources[effectName]
         let missing = effect[1] - amt;
         let coinCost = missing * coinValues[effectName];
@@ -44,7 +46,7 @@ export function doEffect(effect, sourceComponent) {
         doEffect(["coin", coinCost], sourceComponent);
       }
       if (amt < -resources[effectName]) {
-        throw new Error("Not enough resources")
+        //throw new Error("Not enough resources")
       }
       resources[effectName] += amt
       setTimeout(() => {

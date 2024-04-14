@@ -25,6 +25,9 @@ Array.prototype.toShuffled = function() {
 }
 
 function startGame() {
+  resources.coin = 6;
+  resources.diamond = 3;
+  resources.sword = 0;
   document.getElementById("game-wrap").classList.remove("hidden")
   let deck = cardData.filter(card => card.tier === "s").toShuffled();
   drawDeck.push(...deck)

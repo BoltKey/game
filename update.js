@@ -19,7 +19,7 @@ export function updateOffer() {
   updateCards(supplyOffer, 350, 50, 140, 600);
 }
 function updateActiveMonsters() {
-  updateCards(activeMonsters, 350, 750, 140, 600)
+  updateCards(activeMonsters, 930, 780, 140, 600)
 }
 export function updateMonsterQueue() {
   for (let row = 0; row <= 5; ++row) {
@@ -27,8 +27,9 @@ export function updateMonsterQueue() {
     if (!rowWrap) {
       return;
     }
+    let y = [570, 420, 320, 230, 150, 100]
     if (monsterQueue[row]) {
-      updateCards(monsterQueue[row], 690, 900 - row * 150, 140, 600, 0.7);
+      updateCards(monsterQueue[row], 930, y[row], 140, 600, 0.7 - row * 0.1);
     }
   }
 }
@@ -113,7 +114,7 @@ function createCard(data) {
   card.appendChild(scaleWrap)
   card.id = domId(data.id);
   for (let name of Object.keys(data)) {
-    if (!["effect", "id", "type", "tier", "startRow"].includes(name)) {
+    if (!["effect", "id", "type", "tier", "startRow", "defendCost"].includes(name)) {
       if (data[name]) {
         let el = document.createElement("div");
         el.classList.add(name)
@@ -153,8 +154,8 @@ function playCard(card) {
   if (handIndex == -1) {
     return;
   }
-  discardDeck.push(handCards.splice(handIndex, 1)[0])
   doEffect(card.dataset.effect, card)
+  discardDeck.push(handCards.splice(handIndex, 1)[0])
   removeCard(card);
   updateGame();
 }
