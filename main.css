@@ -108,10 +108,7 @@ body {
   font-size: 30px;
 }
 
-button#endturn {
-  right: 16px;
-  position: absolute;
-  bottom: 10px;
+button {
   font-size: 28px;
   font-weight: bold;
   background: green;
@@ -121,6 +118,13 @@ button#endturn {
   padding: 15px;
   transition: transform 0.3s, filter 0.3s, background-color 0.3s;
   filter: drop-shadow(5px 5px 2px black);
+
+}
+button#endturn {
+  right: 16px;
+
+  position: absolute;
+  bottom: 10px;
 }
 
 #monsters {
@@ -132,11 +136,12 @@ button#endturn {
   transform-origin: center;
 }
 
-button#endturn:hover {
+button:hover {
   transform: scale(1.1, 1.1);
   filter: drop-shadow(8px 8px 8px black);
+  cursor: pointer;
 }
-button#endturn:active {
+button:active {
   transform: scale(0.9, 0.9);
   filter: drop-shadow(1px 1px 1px black);
   background-color: #33dd55;
@@ -144,6 +149,8 @@ button#endturn:active {
 
 button.summon-button {
   left: 45px;
+  padding: 1px;
+  font-size: 20px;
   position: absolute;
   background: lightblue;
   border: none;
@@ -181,4 +188,22 @@ button.summon-button:hover {
   transform: translate(0, 0);
   opacity: 1;
   pointer-events: all;
+}
+
+div#gameover {
+  position: absolute;
+  top: 30%;
+  padding: 30px;
+  background: #e7663db5;
+  font-size: 30px;
+  color: #a50000;
+  border: 3px brown solid;
+  border-radius: 5px;
+  margin: 0 auto;
+  width: auto;
+  z-index: 1500;
+}
+
+#gameover.hidden {
+  display: none;
 }

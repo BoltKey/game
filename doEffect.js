@@ -1,6 +1,6 @@
 import { createFlyer } from "./flyers.js";
 import { activeMonsters, discardDeck, drawDeck, emojiDictionary, handCards, resources } from "./globals.js";
-import { updateGame } from "./update.js";
+import { gameOver, updateGame } from "./update.js";
 
 
 const coinValues = {
@@ -42,13 +42,13 @@ export function doEffect(effect, sourceComponent) {
         else {
           let coinCost = missing * coinValues[effectName];
           if (!coinCost) {
-            throw new Error("Not enough resources")
-
+            gameOver();
           }
           doEffect(["coin", coinCost], sourceComponent);
         }
       }
       if (amt < -resources[effectName]) {
+        gameOver();
         //throw new Error("Not enough resources")
       }
       resources[effectName] += amt

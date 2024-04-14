@@ -46,6 +46,7 @@ export const resources = {
   "diamond": 1,
   "vp": 0,
   "sword": 0,
+  "bossTurns": 0
 }
 export const emojiDictionary = {
   "💎": "diamond",
@@ -53,6 +54,10 @@ export const emojiDictionary = {
   "💖": "heart",
   "⭐": "vp",
   "⚔️": "sword",
+}
+export const status = {
+  helpOpen: false,
+  gameEnded: false
 }
 
 export const cardData = [];

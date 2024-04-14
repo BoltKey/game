@@ -1,5 +1,5 @@
 import { doEffect } from "./doEffect.js";
-import { activeMonsters, discardDeck, drawDeck, handCards, monsterQueue, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
+import { activeMonsters, discardDeck, drawDeck, handCards, monsterQueue, status, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
 
 export function updateGame() {
   updateHand();
@@ -151,6 +151,9 @@ export function domId(id) {
 
 
 function playCard(card) {
+  if (status.eval) {
+    return;
+  }
   if (card.dataset.type === "monster") {
     killCard(card);
     return;
@@ -250,6 +253,7 @@ function banishCard(card) {
   animation.onfinish = () => {
     console.log("animation complete");
     card.remove()
+    updateGame();
   }
 }
 
@@ -261,4 +265,9 @@ export function monsterAttack(card) {
   ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {
   }
+}
+
+export function gameOver() {
+  status.gameEnded = true;
+  document.getElementById("gameover").classList.remove("hidden")
 }

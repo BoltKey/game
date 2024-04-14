@@ -10,7 +10,9 @@ id,name,costCoins,costDiamonds,costSword,effectText,defendCost,buyCost,effect,ti
 10,Prospector,4,,,💎,,2,"[[""diamond"", 1]]",1,action
 11,Advanced Prospector,5,2,,🪙🪙💎,,4,"[[""coin"", 2], ""diamond""]",1,action
 12,Rookie Swordsman,,5,,⚔️⚔️,,5,"[[""sword"", 2]]",1,action
-13,Spy,7,4,,⚔️🎴,,8,"[[""sword"", 1], [""draw"", 1]]",1,action
+ab,Banker,3,4,,🪙🎴,,4,"[[""coin"", 1], ""draw""]",1,action
+ac,Advanced Banker,10,3,,💎🎴,,6,"[[""diamond"", 1], ""draw""]",1,action
+13,Tactician,11,7,,🎴🎴,,10,"[[""draw"", 2]]",1,action
 14,Basic Miner,,2,,🪙,,,coin,s,action
 15,Basic Miner,,2,,🪙,,,coin,s,action
 16,Basic Miner,,2,,🪙,,,coin,s,action

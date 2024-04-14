@@ -1,9 +1,8 @@
 import { doEffect } from "./doEffect.js";
-import { activeMonsters, cardData, discardDeck, drawDeck, handCards, monsterQueue, resources, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
+import { activeMonsters, cardData, discardDeck, drawDeck, handCards, monsterQueue, resources, status, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
 import { domId, monsterAttack, updateGame } from "./update.js";
 
 let loaded = false;
-let helpOpen = false;
 
 
 function main() {
@@ -25,8 +24,8 @@ Array.prototype.toShuffled = function() {
 }
 
 function toggleHelp() {
-  helpOpen = !helpOpen;
-  if (helpOpen) {
+  status.helpOpen = !status.helpOpen;
+  if (status.helpOpen) {
     document.getElementById("rules").classList.add("open")
   }
   else {
@@ -35,14 +34,30 @@ function toggleHelp() {
 }
 
 function startGame() {
+  for (let card of document.querySelectorAll(".card-wrap")) {
+    card.remove();
+  }
+  status.gameEnded = false
+  document.getElementById("gameover").classList.add("hidden")
+
   resources.coin = 6;
   resources.diamond = 3;
   resources.sword = 0;
   document.getElementById("game-wrap").classList.remove("hidden")
   let deck = cardData.filter(card => card.tier === "s").toShuffled();
+  drawDeck.length = 0;
+  handCards.length = 0;
+  summonedCards.length = 0;
+  activeMonsters.length = 0;
   drawDeck.push(...deck)
 
   let offer = cardData.filter(card => card.tier === "1" && card.type === "action").toShuffled();
+  supplyDeck.length = 0;
+  supplyOffer.length = 0;
+  for (let row of monsterQueue) {
+    row.length = 0;
+  }
+
   supplyDeck.push(...offer);
   for (let i = 0; i < 4; ++i) {
     supplyOffer.push(supplyDeck.shift())
@@ -64,25 +79,47 @@ function startGame() {
   document.getElementById("endturn").onclick = endTurn;
   document.getElementById("close-help").onclick = toggleHelp;
   document.getElementById("help").onclick = toggleHelp;
+  document.getElementById("tryagain").onclick = startGame;
 }
 
-function endTurn() {
+async function endTurn() {
   doEffect(["coin", resources.sword]);
   doEffect(["sword", -resources.sword]);
-  for (let c of summonedCards) {
+  status.eval = true;
+  document.getElementById("endturn").setAttribute("disabled", true)
+
+  if (summonedCards.length) {
+    for (let c of summonedCards) {
     let effect = c.effect;
-    doEffect(effect, document.getElementById(domId(c.id)));
+      doEffect(effect, document.getElementById(domId(c.id)));
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  for (let c of handCards) {
-    doEffect(["coin", -1], document.getElementById(domId(c.id)));
-  }
-  for (let c of activeMonsters) {
-    let cost = c.defendCost;
-    doEffect(["coin", -cost], document.getElementById(domId(c.id)));
+  if (handCards.length || activeMonsters.length) {
+    for (let c of handCards) {
+      doEffect(["coin", -1], document.getElementById(domId(c.id)));
+    }
+    for (let c of activeMonsters) {
+      let cost = c.defendCost;
+      if (c.name === "The Dark Lord") {
+        cost = bossStrength();
+        resources.bossTurns += 1;
+        document.querySelector("#card-51 .effectText").innerText = "-" + bossStrength() + "🪙";
+      }
+      doEffect(["coin", -cost], document.getElementById(domId(c.id)));
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
   moveMonsters();
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  document.getElementById("endturn").removeAttribute("disabled")
+  status.eval = false;
   updateGame();
   doEffect(["draw", 3])
+}
+
+function bossStrength() {
+  return 10 + resources.bossTurns * 4;
 }
 
 function moveMonsters() {
@@ -92,12 +129,6 @@ function moveMonsters() {
     monsterAttack(document.getElementById(domId(m.id)));
   }
 }
-
-
-
-
-
-
 
 function loadCards() {
   fetch('cards.csv')
