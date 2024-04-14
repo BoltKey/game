@@ -176,9 +176,11 @@ button[disabled] {
   z-index: 3500;
   background-color: rgba(255, 200, 97, 1);
   backdrop-filter: blur(10px);
+  height: 365px;
   padding: 30px;
   width: 100%;
-  margin: 50px;
+  margin: 27px;
+  overflow: auto;
   width: auto;
   border-radius: 30px;
   border: solid 4px rgb(117, 70, 0);
@@ -187,7 +189,6 @@ button[disabled] {
   transition: transform .5s, opacity 0.5s;
   pointer-events: none;
 }
-
 #rules.open {
   transform: translate(0, 0);
   opacity: 1;
