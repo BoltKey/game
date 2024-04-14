@@ -1,5 +1,5 @@
 import { doEffect } from "./doEffect.js";
-import { activeMonsters, discardDeck, drawDeck, handCards, monsterQueue, status, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
+import { activeMonsters, discardDeck, drawDeck, handCards, monsterQueue, resources, status, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
 
 export function updateGame() {
   updateHand();
@@ -191,6 +191,9 @@ function killCard(card) {
   doEffect(["vp", card.dataset.banishvp], card)
   let handIndex = activeMonsters.findIndex(c => c.id === card.dataset.id)
   activeMonsters.splice(handIndex, 1)[0]
+  if (card.name === "The Dark Lord") {
+    gameWin();
+  }
   banishCard(card)
 }
 
@@ -270,4 +273,12 @@ export function monsterAttack(card) {
 export function gameOver() {
   status.gameEnded = true;
   document.getElementById("gameover").classList.remove("hidden")
+}
+
+export function gameWin() {
+  status.gameEnded = true;
+  document.getElementById("gamewin").classList.remove("hidden")
+  let score = resources.coin + 3 * resources.diamond;
+  document.getElementById("scorenumber").innerText = score;
+
 }

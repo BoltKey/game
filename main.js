@@ -1,6 +1,6 @@
 import { doEffect } from "./doEffect.js";
 import { activeMonsters, cardData, discardDeck, drawDeck, handCards, monsterQueue, resources, status, summonedCards, supplyDeck, supplyOffer } from "./globals.js";
-import { domId, monsterAttack, updateGame } from "./update.js";
+import { domId, gameWin, monsterAttack, updateGame } from "./update.js";
 
 let loaded = false;
 
@@ -39,6 +39,7 @@ function startGame() {
   }
   status.gameEnded = false
   document.getElementById("gameover").classList.add("hidden")
+  document.getElementById("gamewin").classList.add("hidden")
 
   resources.coin = 6;
   resources.diamond = 3;
@@ -79,10 +80,15 @@ function startGame() {
   document.getElementById("endturn").onclick = endTurn;
   document.getElementById("close-help").onclick = toggleHelp;
   document.getElementById("help").onclick = toggleHelp;
-  document.getElementById("tryagain").onclick = startGame;
+  for (let e of document.querySelectorAll(".tryagain")) {
+    e.onclick = startGame;
+  }
 }
 
 async function endTurn() {
+  for (let effectName of ["coin", "diamond", "sword"]) {
+    document.getElementById(effectName + "-number").innerText = resources[effectName];
+  }
   doEffect(["coin", resources.sword]);
   doEffect(["sword", -resources.sword]);
   status.eval = true;
@@ -97,7 +103,7 @@ async function endTurn() {
   }
   if (handCards.length || activeMonsters.length) {
     for (let c of handCards) {
-      doEffect(["coin", -1], document.getElementById(domId(c.id)));
+      doEffect(["coin", -1], document.getElementById(domId(c.id)), true);
     }
     for (let c of activeMonsters) {
       let cost = c.defendCost;
@@ -106,7 +112,7 @@ async function endTurn() {
         resources.bossTurns += 1;
         document.querySelector("#card-51 .effectText").innerText = "-" + bossStrength() + "🪙";
       }
-      doEffect(["coin", -cost], document.getElementById(domId(c.id)));
+      doEffect(["coin", -cost], document.getElementById(domId(c.id)), true);
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
@@ -119,7 +125,7 @@ async function endTurn() {
 }
 
 function bossStrength() {
-  return 10 + resources.bossTurns * 4;
+  return 20 + resources.bossTurns * 8;
 }
 
 function moveMonsters() {

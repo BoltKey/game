@@ -13,7 +13,7 @@ body {
   height: 100%;
   position: relative;
   margin: auto;
-
+  height: 1000px;
 }
 
 #game-wrap.hidden {
@@ -166,6 +166,10 @@ button.summon-button:hover {
   cursor: pointer;
 }
 
+button[disabled] {
+  background-color: gray;
+}
+
 #rules {
   position: absolute;
   top: 10px;
@@ -189,21 +193,30 @@ button.summon-button:hover {
   opacity: 1;
   pointer-events: all;
 }
-
-div#gameover {
+.endscreen {
   position: absolute;
   top: 30%;
   padding: 30px;
-  background: #e7663db5;
   font-size: 30px;
+  border-radius: 5px;
+  z-index: 1500;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+div#gameover {
   color: #a50000;
   border: 3px brown solid;
-  border-radius: 5px;
-  margin: 0 auto;
-  width: auto;
-  z-index: 1500;
+  background: #e7663db5;
+}
+div#gamewin {
+  color: #0a5300;
+  border: 3px rgb(0, 105, 47) solid;
+  background: #1afa4bb2;
 }
 
-#gameover.hidden {
+.hidden {
   display: none;
 }

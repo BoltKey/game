@@ -49,7 +49,7 @@
     There is a number of mechanics you should understand in order to win by defeating all monsters.
     You may need multiple attempts before you manage to win.
     <h2>Goal of the game</h2>
-    Defeat all monsters.
+    Defeat all monsters. Your final score is amount of your coins plus 3 times the amount of your diamonds.
     <h2>Card anatomy</h2>
     [image of card]
     <h2>Resources</h2>
@@ -98,9 +98,15 @@
     </ol>
     <button id="close-help">Let's play!</button>
   </div>
-  <div id="gameover">
-    Game Over
-    <button id="tryagain">Try again</button>
+  <div id="gameover" class="endscreen">
+    Game Over<br>
+    <button class="tryagain">Try again</button>
+  </div>
+  <div id="gamewin" class="endscreen">
+    You win! Congratulations. <br>
+    <br>
+    Your score is <span id="scorenumber">100</span><br>
+    <button class="tryagain">Try again</button>
   </div>
 </body>
 </html>

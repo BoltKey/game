@@ -6,7 +6,7 @@ import { gameOver, updateGame } from "./update.js";
 const coinValues = {
   "sword": 4
 }
-export function doEffect(effect, sourceComponent) {
+export function doEffect(effect, sourceComponent, force = false) {
   console.log(effect)
 
   if (typeof effect === "string") {
@@ -20,7 +20,7 @@ export function doEffect(effect, sourceComponent) {
   }
   if (Array.isArray(effect[0])) {
     for (let e of effect) {
-      doEffect(e, sourceComponent)
+      doEffect(e, sourceComponent, force)
     }
     return;
   }
@@ -37,19 +37,29 @@ export function doEffect(effect, sourceComponent) {
         let missing = effect[1] - amt;
         if (effectName === "coin") {
 
-          doEffect(["diamond", missing], sourceComponent)
+          doEffect(["diamond", missing], sourceComponent, force)
         }
         else {
           let coinCost = missing * coinValues[effectName];
           if (!coinCost) {
-            gameOver();
+            if (force) {
+              gameOver();
+              amt = effect[1]
+            }
+            else {
+              throw "Not enough coins"
+            }
           }
-          doEffect(["coin", coinCost], sourceComponent);
+          doEffect(["coin", coinCost], sourceComponent, force);
         }
       }
       if (amt < -resources[effectName]) {
-        gameOver();
-        //throw new Error("Not enough resources")
+        if (force) {
+          gameOver();
+        }
+        else {
+          throw "Not enough coins"
+        }
       }
       resources[effectName] += amt
       setTimeout(() => {
