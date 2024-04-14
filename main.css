@@ -246,3 +246,9 @@ div#gamewin {
   bottom: 180px;
   left: 680px;
 }
+
+.costSword {
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+}
