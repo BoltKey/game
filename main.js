@@ -47,6 +47,7 @@ function startGame() {
   document.getElementById("game-wrap").classList.remove("hidden")
   let deck = cardData.filter(card => card.tier === "s").toShuffled();
   drawDeck.length = 0;
+  discardDeck.length = 0;
   handCards.length = 0;
   summonedCards.length = 0;
   activeMonsters.length = 0;
