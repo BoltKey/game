@@ -10,16 +10,16 @@ export function updateGame() {
   updateActiveMonsters();
 }
 export function updateHand() {
-  updateCards(handCards, 350, 550, 140, 600);
+  updateCards(handCards, 350, 250, 120, 530, 0.8);
 }
 export function updateSummoned() {
-  updateCards(summonedCards, 350, 350, 100, 600, 0.8);
+  updateCards(summonedCards, 350, 110, 100, 600, 0.4);
 }
 export function updateOffer() {
-  updateCards(supplyOffer, 350, 50, 140, 600);
+  updateCards(supplyOffer, 350, -10, 140, 600, 0.7);
 }
 function updateActiveMonsters() {
-  updateCards(activeMonsters, 380, 780, 140, 500)
+  updateCards(activeMonsters, 380, 380, 140, 500, 0.5)
 }
 export function updateMonsterQueue() {
   for (let row = 0; row <= 5; ++row) {
@@ -27,7 +27,7 @@ export function updateMonsterQueue() {
     if (!rowWrap) {
       return;
     }
-    let y = [570, 420, 320, 230, 150, 100]
+    let y = [260, 125, 35, -5, -35, -60]
     if (monsterQueue[row]) {
       updateCards(monsterQueue[row], 800, y[row], 100 - row * 10, 600, 0.7 - row * 0.1);
     }
@@ -168,7 +168,7 @@ function playCard(card) {
     return;
   }
   let playCard = handCards.splice(handIndex, 1)[0]
-  doEffect(card.dataset.effect, card)
+  doEffect(card.dataset.effect, card, false, 350)
   discardDeck.push(playCard)
   removeCard(card);
   updateGame();
@@ -229,10 +229,11 @@ function getPlayArea() {
 function removeCard(card) {
   let animation = card.animate([
     { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 100},
-    { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
-    { transform: "scale(1.3, 1.3) translate(0, -200px)", opacity: 1},
+    { transform: "scale(1.3, 1.3) translate(0, -100px)", opacity: 1},
+    { transform: "scale(1.3, 1.3) translate(0, -100px)", opacity: 1},
+    { transform: "scale(1.3, 1.3) translate(0, -100px)", opacity: 1},
     { transform: "scale(0.7, 0.7) translate(400px, -20px)", opacity: 0},
-  ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
+  ], {duration: 1000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {
     console.log("animation complete");
     card.remove()
@@ -243,7 +244,7 @@ function gainCardAnim(card) {
   let animation = card.animate([
     { transform: "scale(1.1, 1.1) translate(0, 0)", opacity: 1, zIndex: 10},
     { opacity: 1},
-    { transform: "scale(1.3, 1.3) translate(300px, 200px)", opacity: 0},
+    { transform: "scale(1.3, 1.3) translate(100px, 100px)", opacity: 0},
   ], {duration: 2000, fill: "forwards", easing: "ease-in-out"})
   animation.onfinish = () => {
     console.log("animation complete");

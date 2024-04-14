@@ -94,7 +94,7 @@ async function endTurn() {
 
   if (summonedCards.length) {
     for (let c of summonedCards) {
-    let effect = c.effect;
+      let effect = c.effect;
       doEffect(effect, document.getElementById(domId(c.id)));
     }
     await new Promise(resolve => setTimeout(resolve, 1000));

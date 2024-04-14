@@ -9,11 +9,10 @@ html {
 }
 body {
   overflow: hidden;
-  width: 1000px;
-  height: 100%;
+  width: 948px;
   position: relative;
   margin: auto;
-  height: 1000px;
+  height: 533px;
 }
 
 #game-wrap.hidden {
@@ -237,12 +236,12 @@ div#gamewin {
 
 #deck {
   background: green;
-  bottom: 300px;
+  bottom: 180px;
   left: 20px;
 }
 
 #discard {
   background: green;
-  bottom: 300px;
+  bottom: 180px;
   left: 680px;
 }

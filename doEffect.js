@@ -6,7 +6,7 @@ import { gameOver, updateGame } from "./update.js";
 const coinValues = {
   "sword": 4
 }
-export function doEffect(effect, sourceComponent, force = false) {
+export function doEffect(effect, sourceComponent, force = false, delay = 0) {
   console.log(effect)
 
   if (typeof effect === "string") {
@@ -20,7 +20,7 @@ export function doEffect(effect, sourceComponent, force = false) {
   }
   if (Array.isArray(effect[0])) {
     for (let e of effect) {
-      doEffect(e, sourceComponent, force)
+      doEffect(e, sourceComponent, force, delay)
     }
     return;
   }
@@ -37,7 +37,7 @@ export function doEffect(effect, sourceComponent, force = false) {
         let missing = effect[1] - amt;
         if (effectName === "coin") {
 
-          doEffect(["diamond", missing], sourceComponent, force)
+          doEffect(["diamond", missing], sourceComponent, force, delay)
         }
         else {
           let coinCost = missing * coinValues[effectName];
@@ -50,7 +50,7 @@ export function doEffect(effect, sourceComponent, force = false) {
               throw "Not enough coins"
             }
           }
-          doEffect(["coin", coinCost], sourceComponent, force);
+          doEffect(["coin", coinCost], sourceComponent, force, delay);
         }
       }
       if (amt < -resources[effectName]) {
@@ -73,7 +73,7 @@ export function doEffect(effect, sourceComponent, force = false) {
             document.getElementById(effectName + "-number").innerText = +currNum + (neg ? -1 : 1)
           }, i * 100 + (neg ? 10 : 1000))
         }
-      }, 1000)
+      }, delay)
       break;
     case "draw":
       for (let i = 0; i < effect[1]; ++i) {
