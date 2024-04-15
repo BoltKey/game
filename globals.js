@@ -50,7 +50,7 @@ export const resources = {
 }
 export const emojiDictionary = {
   "💎": "diamond",
-  "🪙": "coin",
+  "💰": "coin",
   "💖": "heart",
   "⭐": "vp",
   "⚔️": "sword",

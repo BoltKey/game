@@ -109,7 +109,7 @@ async function endTurn() {
       if (c.name === "The Dark Lord") {
         cost = bossStrength();
         resources.bossTurns += 1;
-        document.querySelector("#card-51 .effectText").innerText = "-" + bossStrength() + "🪙";
+        document.querySelector("#card-51 .effectText").innerText = "-" + bossStrength() + "💰";
       }
       doEffect(["coin", -cost], document.getElementById(domId(c.id)), true);
     }

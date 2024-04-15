@@ -113,9 +113,9 @@ function updateCards(cards, x, y, margin, maxWidth, scale = 1) {
 function createCard(data) {
   let card = document.createElement("div");
   let textPrefix = {
-    costCoins: "🪙",
-    buyCost: "🪙",
-    defendCost: "🪙",
+    costCoins: "💰",
+    buyCost: "💰",
+    defendCost: "💰",
     costDiamonds: "💎",
     costSword: "⚔️",
     banishVp: "⭐"
